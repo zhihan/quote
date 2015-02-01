@@ -1,0 +1,15 @@
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+mainClassName = "me.zhihan.quote.Main"
+
+repositories {
+     jcenter()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.0'
+
+    testCompile "junit:junit:4.11"
+    testCompile "org.hamcrest:hamcrest-all:1.3"
+}
