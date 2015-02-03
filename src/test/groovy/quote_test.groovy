@@ -32,4 +32,20 @@ class QuoteTest {
         assertThat(isNew, equalTo(true))
         assertThat(q.getTags().size(), equalTo(3))
     }
+
+    @Test
+    void testToJson() {
+        Quote q = new Quote(text: "whatever", tags: ["a", "b"])
+        String jsonText = q.toJson()
+        assertThat(jsonText.size(), greaterThan(10))
+    }
+
+    @Test
+    void testFromJson() {
+        Quote q = new Quote(text: "whatever", tags: ["a", "b"])
+        String jsonText = '{"text": "whatever", "tags": ["a", "b"]}'
+        Quote x = QuoteUtil.fromJson(jsonText)
+        println(x.toJson())
+        assertThat(q, equalTo(x))
+    }
 }
