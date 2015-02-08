@@ -2,6 +2,7 @@ package me.zhihan.quote
 
 import org.junit.Test
 import org.junit.Assert
+import java.net.URI
 
 import static org.hamcrest.MatcherAssert.assertThat
 import static org.hamcrest.Matchers.*
@@ -47,5 +48,16 @@ class QuoteTest {
         Quote x = QuoteUtil.fromJson(jsonText)
         println(x.toJson())
         assertThat(q, equalTo(x))
+    }
+
+    @Test
+    void testEnumSerialization() {
+        Source source = new Source(sourceType: SourceType.SONG, 
+            uriString: "http://example.com")
+        Quote q = new Quote(text: "let it be.", tags:["song"], source: source)
+        String jsonText = q.toJson()
+        
+        Quote q2 = QuoteUtil.fromJson(jsonText)
+        assertThat(q, equalTo(q2))
     }
 }

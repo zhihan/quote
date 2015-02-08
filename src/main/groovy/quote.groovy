@@ -11,6 +11,7 @@ import java.util.Map
 enum SourceType {
     BOOK,
     MOVIE,
+    SONG,
     TV,
     SPEECH,
     BLOG,
@@ -21,7 +22,26 @@ enum SourceType {
 @CompileStatic
 class Source {
     SourceType sourceType
-    URI uri
+    String uriString
+
+    URI uri() {
+        new URI(uriString)
+    }
+
+    boolean equals(Object obj) {
+        if (obj instanceof Source) {
+            Source that = obj as Source
+            if (!sourceType.equals(that.sourceType)){
+                return false;
+            }
+            if (!uriString.equals(that.uriString)) {
+                return false;
+            }
+            return true;
+        } else {
+            return false
+        }
+    }
 }
 
 /**
@@ -39,15 +59,15 @@ class Quote {
     Source source
     List<String> links // Links to related web pages 
  
-    Boolean containTag(String tag) {
+    boolean containTag(String tag) {
         return tags.any{it.equals(tag) }
     }
 
-    Boolean containTagSub(String sub) {
+    boolean containTagSub(String sub) {
         return tags.any{it.indexOf(sub) >= 0}
     }
 
-    Boolean addTag(String t) {
+    boolean addTag(String t) {
         if (tags.any{it.equals(t)}) {
             false
         } else {
@@ -79,6 +99,11 @@ class Quote {
             }
             if (!result) return result
 
+            if (source == null) {
+                result = (o.source == null)
+            } else {
+                result = source.equals(o.source)
+            }
             return result
         } else {
             false
