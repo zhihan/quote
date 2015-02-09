@@ -1,9 +1,11 @@
 package me.zhihan.quote
 
 import groovy.transform.CompileStatic
-import groovy.json.*
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 
 import java.net.URI
+import java.net.URL
 import java.util.List
 import java.util.Map
 
@@ -120,5 +122,21 @@ class QuoteUtil {
     static Quote fromJson(String json) {
         Object object = new JsonSlurper().parseText(json)
         new Quote(object)
+    }
+
+    static Quote fromFile(File file) {
+        Object object = new JsonSlurper().parse(file)
+        new Quote(object)
+    }
+
+    static Quote fromURL(URL url) {
+        Object object = new JsonSlurper().parse(url, "utf-8")
+        new Quote(object)
+    }
+
+    static List<Quote> loadList(URL url) {
+        List l = new JsonSlurper().parse(url, "utf-8")
+        print(l)
+        l.collect{ new Quote(it) }
     }
 }

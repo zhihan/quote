@@ -59,5 +59,21 @@ class QuoteTest {
         
         Quote q2 = QuoteUtil.fromJson(jsonText)
         assertThat(q, equalTo(q2))
+        assertThat(q2.source.sourceType, equalTo(SourceType.SONG))
+    }
+
+    @Test
+    void testLoadFromJson() {
+        URL url = ClassLoader.getSystemClassLoader().getResource("test_data1.json")
+        List<Quote> l = QuoteUtil.loadList(url)
+        assertThat(l.size(), equalTo(1))
+
+        Quote x = l[0]
+        assertThat(x.text, equalTo("The truth is out there."))
+        assertThat(x.person, equalTo(null))
+        assertThat(x.links, equalTo(
+            ["http://en.wikipedia.org/wiki/The_X-Files"]))
+        assertThat(x.source.sourceType, 
+            equalTo(SourceType.TV))
     }
 }

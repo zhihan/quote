@@ -1,0 +1,11 @@
+[{ 
+    "person": null,
+    "text": "The truth is out there.",
+    "links": [
+        "http://en.wikipedia.org/wiki/The_X-Files"
+    ],
+    "source": {
+        "sourceType": "TV",
+        "uriString": null
+    }
+}] 
