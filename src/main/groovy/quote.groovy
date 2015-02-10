@@ -46,6 +46,21 @@ class Source {
     }
 }
 
+@CompileStatic
+class Person {
+    String person // ID
+    String firstName
+    String lastName
+    String profession
+
+    boolean equals(Object obj) {
+        if (obj instanceof Person) {
+            Person that = obj as Person
+            return (person.equals(that.person))
+        }
+    }
+}
+
 /**
  * Quote 
  *

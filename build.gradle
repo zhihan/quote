@@ -9,6 +9,8 @@ repositories {
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.0'
+    compile 'com.google.apis:google-api-services-datastore-protobuf:v1beta2-rev1-2.1.2'
+    compile 'com.google.api-client:google-api-client:1.19.1'
 
     testCompile "junit:junit:4.11"
     testCompile "org.hamcrest:hamcrest-all:1.3"
